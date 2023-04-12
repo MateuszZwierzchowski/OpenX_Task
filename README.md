@@ -17,7 +17,6 @@ First tree: NodeValue, IndexOfLeftCild, IndexOfRightChild : NodeValue, IndexOfLe
 
 Second tree: NodeValue, IndexOfLeftCild, IndexOfRightChild : NodeValue, IndexOfLeftCild, IndexOfRightChild : NodeValue, IndexOfLeftCild, IndexOfRightChild : ...
 
-***************************************************************************************
 
 [Test case #1] expectedCheckIfTreesAreEquivalent boolean ; First tree ; Second tree
 
