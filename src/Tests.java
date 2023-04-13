@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BinaryTreeTest {
 
     static class treeInfo{
-        int expectedNumberOfNodesWithoutChildren = 0;
-        int expectedLargestNumberOfEdgesFromRootToLeaf = 0;
+        int expectedNumberOfNodesWithoutChildren ;
+        int expectedLargestNumberOfEdgesFromRootToLeaf;
 
         public treeInfo(int expectedNumberOfNodesWithoutChildren, int expectedLargestNumberOfEdgesFromRootToLeaf) {
             this.expectedNumberOfNodesWithoutChildren = expectedNumberOfNodesWithoutChildren;
@@ -22,6 +22,22 @@ class BinaryTreeTest {
     static List<BinaryTree> trees = new ArrayList<>();
     static List<treeInfo> treesInfo = new ArrayList<>();
 
+
+    static void ParseTree(String[] tree, Integer[][] tempList1) {
+
+        int k=0;
+
+        for (String nodeValues : tree) {
+            String[] node = nodeValues.split(",");
+
+            tempList1[k][0] = node[0].trim().equals("null") ? null : Integer.parseInt(node[0].trim());
+            tempList1[k][1] = node[1].trim().equals("null") ? null : Integer.parseInt(node[1].trim());
+            tempList1[k][2] = node[2].trim().equals("null") ? null : Integer.parseInt(node[2].trim());
+
+            k++;
+
+        }
+    }
 
     @BeforeAll
     static void setup(){
@@ -36,17 +52,7 @@ class BinaryTreeTest {
 
                 Integer[][] tempList = new Integer[tree.length][3];
 
-                int k=0;
-                for (String nodeValues : tree) {
-                    String[] node = nodeValues.split(",");
-
-                    tempList[k][0] = node[0].trim().equals("null") ? null : Integer.parseInt(node[0].trim());
-                    tempList[k][1] = node[1].trim().equals("null") ? null : Integer.parseInt(node[1].trim());
-                    tempList[k][2] = node[2].trim().equals("null") ? null : Integer.parseInt(node[2].trim());
-
-                    k++;
-
-                }
+                BinaryTreeTest.ParseTree(tree, tempList);
 
                 treesInfo.add(new treeInfo(Integer.parseInt(data[0].trim()), Integer.parseInt(data[1].trim())));
                 trees.add(new BinaryTree(tempList));
@@ -61,14 +67,14 @@ class BinaryTreeTest {
 
     @Test
     void numberOfNodesWithoutChildren() {
-        for(int i=0; i<this.trees.size(); i++){
+        for(int i = 0; i< trees.size(); i++){
             assertEquals(treesInfo.get(i).expectedNumberOfNodesWithoutChildren, trees.get(i).NumberOfNodesWithoutChildren());
         }
     }
 
     @Test
     void largestNumberOfEdgesFromRootToLeaf() {
-        for(int i=0; i<this.trees.size(); i++){
+        for(int i = 0; i< trees.size(); i++){
             assertEquals(treesInfo.get(i).expectedLargestNumberOfEdgesFromRootToLeaf, trees.get(i).LargestNumberOfEdgesFromRootToLeaf());
         }
 
@@ -77,9 +83,25 @@ class BinaryTreeTest {
 
 class BinaryTreesTest {
 
-    static List<BinaryTrees> trees = new ArrayList<BinaryTrees>();
+    static List<BinaryTrees> trees = new ArrayList<>();
     static List<Boolean> treesInfo = new ArrayList<>();
 
+
+    static void ParseTree(String[] tree, Integer[][] tempList1) {
+
+        int k=0;
+
+        for (String nodeValues : tree) {
+            String[] node = nodeValues.split(",");
+
+            tempList1[k][0] = node[0].trim().equals("null") ? null : Integer.parseInt(node[0].trim());
+            tempList1[k][1] = node[1].trim().equals("null") ? null : Integer.parseInt(node[1].trim());
+            tempList1[k][2] = node[2].trim().equals("null") ? null : Integer.parseInt(node[2].trim());
+
+            k++;
+
+        }
+    }
 
 
     @BeforeAll
@@ -98,33 +120,12 @@ class BinaryTreesTest {
 
                 Integer[][] tempList = new Integer[tree1.length][3];
 
-                int k=0;
-                for (String nodeValues : tree1) {
-                    String[] node = nodeValues.split(",");
-
-                    tempList[k][0] = node[0].trim().equals("null") ? null : Integer.parseInt(node[0].trim());
-                    tempList[k][1] = node[1].trim().equals("null") ? null : Integer.parseInt(node[1].trim());
-                    tempList[k][2] = node[2].trim().equals("null") ? null : Integer.parseInt(node[2].trim());
-
-                    k++;
-
-                }
-
+                ParseTree(tree1, tempList);
 
 
                 Integer[][] tempList2 = new Integer[tree2.length][3];
 
-                k=0;
-                for (String nodeValues : tree2) {
-                    String[] node = nodeValues.split(",");
-
-                    tempList2[k][0] = node[0].trim().equals("null") ? null : Integer.parseInt(node[0].trim());
-                    tempList2[k][1] = node[1].trim().equals("null") ? null : Integer.parseInt(node[1].trim());
-                    tempList2[k][2] = node[2].trim().equals("null") ? null : Integer.parseInt(node[2].trim());
-
-                    k++;
-
-                }
+                ParseTree(tree2, tempList2);
 
                 treesInfo.add(Boolean.parseBoolean(data[0].trim()));
                 trees.add(new BinaryTrees(new BinaryTree(tempList), new BinaryTree(tempList2)));
@@ -142,7 +143,7 @@ class BinaryTreesTest {
 
     @org.junit.jupiter.api.Test
     void checkIfTreesAreEquivalent() {
-        for(int i=0; i<this.trees.size(); i++){
+        for(int i = 0; i< trees.size(); i++){
             assertEquals(trees.get(i).CheckIfTreesAreEquivalent(), treesInfo.get(i));
         }
     }
